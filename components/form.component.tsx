@@ -1,6 +1,6 @@
 'use client'
 
-import { createUser } from '@/utils/actions'
+import { createUser } from '@/utils/actions.utils'
 
 const Form = () => {
   return (
