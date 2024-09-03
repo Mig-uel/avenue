@@ -1,6 +1,8 @@
 import Image from 'next/image'
 import vrImg from '@/images/vr.jpg'
 
+const imageSrc = 'https://www.course-api.com/images/tours/tour-1.jpeg'
+
 const Tour = ({ params }: { params: { id: string } }) => {
   return (
     <div>
@@ -16,6 +18,19 @@ const Tour = ({ params }: { params: { id: string } }) => {
             height={192}
           />
           <h2>local image</h2>
+        </div>
+
+        {/* remote image */}
+        {/* remote images require width and height */}
+        <div>
+          <Image
+            className='w-48 h-48 object-cover rounded'
+            src={imageSrc}
+            alt='tour image'
+            width={192}
+            height={192}
+          />
+          <h2>remote image</h2>
         </div>
       </section>
       <h1 className='text-4xl'>ID: {params.id}</h1>
