@@ -1,10 +1,17 @@
 import Navbar from '@/components/navbar.component'
 import { Inconsolata, Inter, Roboto } from 'next/font/google'
 import './globals.css'
+import type { Metadata } from 'next'
 
 const inter = Inter({
   subsets: ['latin'],
 })
+
+export const metadata: Metadata = {
+  title: 'Next.js Project',
+  description: 'A Next.js project with TypeScript and TailwindCSS.',
+  keywords: 'Next.js, TypeScript, TailwindCSS',
+}
 
 // const inconsolata = Inconsolata({
 //   subsets: ['latin'],
