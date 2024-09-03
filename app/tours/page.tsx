@@ -6,10 +6,16 @@ type Tour = {
   price: string
 }
 
-const ToursPage = async () => {
+const fetchTours = async () => {
   const response = await fetch('https://www.course-api.com/react-tours-project')
 
   const data: Tour[] = await response.json()
+
+  return data
+}
+
+const ToursPage = async () => {
+  const data = await fetchTours()
 
   return (
     <section>
