@@ -1,6 +1,8 @@
 'use server'
 
 import fs from 'fs/promises'
+import { revalidatePath } from 'next/cache'
+import { redirect } from 'next/navigation'
 
 type User = {
   id?: string
@@ -9,15 +11,20 @@ type User = {
 }
 
 export const createUser = async (formData: FormData) => {
-  const formObject: User = Object.fromEntries(formData)
+  try {
+    const formObject: User = Object.fromEntries(formData)
 
-  const user: User = {
-    firstName: formObject.firstName,
-    lastName: formObject.lastName,
-    id: Date.now().toString(),
+    const user: User = {
+      firstName: formObject.firstName,
+      lastName: formObject.lastName,
+      id: Date.now().toString(),
+    }
+
+    await saveUser(user)
+    revalidatePath('/actions')
+  } catch (error) {
+    console.log(error)
   }
-
-  await saveUser(user)
 }
 
 export const fetchUsers = async (): Promise<User[]> => {
