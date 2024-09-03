@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 
 type Tour = {
@@ -22,15 +23,27 @@ const ToursPage = async () => {
   return (
     <section>
       <h1 className='text-4xl mb-4'>Tours</h1>
-      {data.map((tour) => (
-        <Link
-          className='block text-blue-400 text-2xl'
-          href={`/tours/${tour.id}`}
-          key={tour.id}
-        >
-          {tour.name}
-        </Link>
-      ))}
+      <div className='grid md:grid-cols-2 gap-8'>
+        {data.map((tour) => (
+          <Link
+            className='block text-blue-400 text-2xl'
+            href={`/tours/${tour.id}`}
+            key={tour.id}
+          >
+            <div className='relative h-48 mb-2'>
+              <Image
+                src={tour.image}
+                alt={tour.name}
+                fill
+                sizes='100vw'
+                priority
+                className='object-cover rounded'
+              />
+            </div>
+            <h2>{tour.name}</h2>
+          </Link>
+        ))}
+      </div>
     </section>
   )
 }
