@@ -1,6 +1,17 @@
 'use client'
 
 import { createUser } from '@/utils/actions.utils'
+import { useFormState, useFormStatus } from 'react-dom'
+
+const SubmitButton = () => {
+  const { pending } = useFormStatus()
+
+  return (
+    <button className='btn-style' type='submit' disabled={pending}>
+      {pending ? 'Submitting...' : 'Submit'}
+    </button>
+  )
+}
 
 const Form = () => {
   return (
@@ -22,9 +33,7 @@ const Form = () => {
         required
       />
 
-      <button className='btn-style' type='submit'>
-        Submit
-      </button>
+      <SubmitButton />
     </form>
   )
 }
