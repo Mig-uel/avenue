@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 type Tour = {
   id: string
   name: string
@@ -19,9 +21,15 @@ const ToursPage = async () => {
 
   return (
     <section>
-      <h1 className='text-3xl'>Tours</h1>
+      <h1 className='text-4xl mb-4'>Tours</h1>
       {data.map((tour) => (
-        <h1 key={tour.id}>{tour.name}</h1>
+        <Link
+          className='block text-blue-400 text-2xl'
+          href={`/tours/${tour.id}`}
+          key={tour.id}
+        >
+          {tour.name}
+        </Link>
       ))}
     </section>
   )
