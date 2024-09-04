@@ -1,7 +1,16 @@
-import { fetchUsers } from '@/utils/actions.utils'
+import { fetchUsers, saveUser } from '@/utils/actions.utils'
 import { NextRequest, NextResponse } from 'next/server'
 
-// NextRequest and NextResponse wrap around the FetchAPI/WebAPI
+// NextRequest and NextResponse wrap around the FetchAPI/WebAPI with more functionality
+
+type PostData = {
+  firstName: string
+  lastName: string
+}
+
+type User = PostData & {
+  id: string
+}
 
 export const GET = async (req: NextRequest) => {
   const { url } = req
@@ -9,5 +18,15 @@ export const GET = async (req: NextRequest) => {
 
   const users = await fetchUsers()
 
-  return NextResponse.redirect(new URL('/', url))
+  return Response.json({ users })
+}
+
+export const POST = async (req: Request) => {
+  const postData: PostData = await req.json()
+
+  const user: User = { ...postData, id: Date.now().toString() }
+
+  await saveUser(user)
+
+  return Response.json({ message: 'user created', user })
 }
