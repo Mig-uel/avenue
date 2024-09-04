@@ -2,7 +2,11 @@
 
 ```sh
 
-npx create-next-app@latest home-away
+npx create-next-app@latest avenue
+
+```
+
+```sh
 ```
 
 ```sh
@@ -25,7 +29,7 @@ export default HomePage
 
 ```tsx
 export const metadata: Metadata = {
-  title: 'HomeAway',
+  title: 'Avenue',
   description: 'Feel at home, away from home.',
 }
 ```
@@ -1474,7 +1478,6 @@ import {
 import ImageInputContainer from '@/components/form/ImageInputContainer'
 
 /* image input container */
-
 ;<ImageInputContainer
   image={profile.profileImage}
   name={profile.username}
