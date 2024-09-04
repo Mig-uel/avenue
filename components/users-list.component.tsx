@@ -8,7 +8,7 @@ const UsersList = async () => {
     <div className='mt-4'>
       <h3 className='text-2xl'>Users</h3>
       {users.length ? (
-        <div>
+        <div className='max-w-lg'>
           {users.map((user) => (
             <h4
               key={user.id}
