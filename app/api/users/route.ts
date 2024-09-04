@@ -1,11 +1,13 @@
 import { fetchUsers } from '@/utils/actions.utils'
+import { NextRequest, NextResponse } from 'next/server'
 
-export const GET = async (req: Request) => {
+// NextRequest and NextResponse wrap around the FetchAPI/WebAPI
+
+export const GET = async (req: NextRequest) => {
   const { url } = req
-  const { searchParams } = new URL(url)
-  const searchParamsObject = Object.fromEntries(searchParams)
+  const id = req.nextUrl.searchParams.get('id')
 
   const users = await fetchUsers()
 
-  return Response.json({ users })
+  return NextResponse.redirect(new URL('/', url))
 }
