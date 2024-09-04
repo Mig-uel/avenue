@@ -1,7 +1,13 @@
+import { NextResponse } from 'next/server'
+
 export function middleware(req: Request) {
-  return Response.json({ message: 'hello' })
+  const { url } = req
+
+  console.log('middleware')
+
+  return NextResponse.redirect(new URL('/', url))
 }
 
 export const config = {
-  matcher: '/about',
+  matcher: ['/about/:path*', '/tours/:path*'],
 }
