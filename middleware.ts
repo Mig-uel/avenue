@@ -1,11 +1,6 @@
-import { NextResponse } from 'next/server'
-
 export function middleware(req: Request) {
   const { url } = req
-
-  console.log('middleware')
-
-  return NextResponse.redirect(new URL('/', url))
+  console.log(url)
 }
 
 export const config = {
