@@ -12,8 +12,6 @@ type User = {
 
 export const createUser = async (prevState: any, formData: FormData) => {
   try {
-    console.log(prevState)
-
     const formObject: User = Object.fromEntries(formData)
 
     const user: User = {
