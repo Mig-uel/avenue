@@ -15,7 +15,7 @@ const UsersList = async () => {
               className='capitalize text-lg flex justify-between item-center mb-2'
             >
               {user.firstName} {user.lastName}
-              <DeleteButton id={user.id as string} />
+              <DeleteButton id={user.id!} />
             </h4>
           ))}
         </div>
