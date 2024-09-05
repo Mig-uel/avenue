@@ -1,5 +1,13 @@
+import { Input } from '../ui/input'
+
 const NavSearch = () => {
-  return <div>NavSearch</div>
+  return (
+    <Input
+      type='text'
+      placeholder="what's your getaway?..."
+      className='max-w-xs dark:bg-muted'
+    />
+  )
 }
 
 export default NavSearch
