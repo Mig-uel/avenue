@@ -10,13 +10,7 @@ import {
 import { SignOutLink, UserIcon } from './'
 import { nav_links } from '@/utils/nav-links'
 import Link from 'next/link'
-import {
-  SignedIn,
-  SignedOut,
-  SignInButton,
-  SignOutButton,
-  SignUpButton,
-} from '@clerk/nextjs'
+import { SignedIn, SignedOut, SignInButton } from '@clerk/nextjs'
 
 const LinksDropdown = () => {
   return (
