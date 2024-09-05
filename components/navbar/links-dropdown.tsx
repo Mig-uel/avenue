@@ -9,6 +9,13 @@ import {
 import { UserIcon } from './'
 import { nav_links } from '@/utils/nav-links'
 import Link from 'next/link'
+import {
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  SignOutButton,
+  SignUpButton,
+} from '@clerk/nextjs'
 
 const LinksDropdown = () => {
   return (
@@ -19,14 +26,43 @@ const LinksDropdown = () => {
           <UserIcon />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className='w-52' align='start' sideOffset={10}>
-        {nav_links.map((link, index) => (
-          <DropdownMenuItem key={index}>
-            <Link href={link.href} className='capitalize w-full'>
-              {link.label}
+      <DropdownMenuContent className='w-52 ' align='start' sideOffset={10}>
+        <SignedIn>
+          {nav_links.map((link, index) => (
+            <DropdownMenuItem key={index}>
+              <Link href={link.href} className='capitalize w-full'>
+                {link.label}
+              </Link>
+            </DropdownMenuItem>
+          ))}
+          <DropdownMenuItem>
+            <SignOutButton>
+              <span className='capitalize w-full cursor-pointer'>Logout</span>
+            </SignOutButton>
+          </DropdownMenuItem>
+        </SignedIn>
+        <SignedOut>
+          <DropdownMenuItem>
+            <Link href='/' className='capitalize w-full'>
+              Home
             </Link>
           </DropdownMenuItem>
-        ))}
+          <DropdownMenuItem>
+            <Link href='/rentals' className='capitalize w-full'>
+              Rentals
+            </Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <SignInButton mode='modal'>
+              <span className='capitalize w-full cursor-pointer'>Login</span>
+            </SignInButton>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <SignUpButton mode='modal'>
+              <span className='capitalize w-full cursor-pointer'>Register</span>
+            </SignUpButton>
+          </DropdownMenuItem>
+        </SignedOut>
       </DropdownMenuContent>
     </DropdownMenu>
   )
