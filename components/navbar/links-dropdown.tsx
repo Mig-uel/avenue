@@ -52,13 +52,10 @@ const LinksDropdown = () => {
           </DropdownMenuItem>
           <DropdownMenuItem>
             <SignInButton mode='modal'>
-              <span className='capitalize w-full cursor-pointer'>Login</span>
+              <button className='capitalize w-full text-left'>
+                Login / Register
+              </button>
             </SignInButton>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            <SignUpButton mode='modal'>
-              <span className='capitalize w-full cursor-pointer'>Register</span>
-            </SignUpButton>
           </DropdownMenuItem>
         </SignedOut>
       </DropdownMenuContent>
