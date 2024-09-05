@@ -6,7 +6,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu'
-import { UserIcon } from './'
+import { SignOutLink, UserIcon } from './'
 import { nav_links } from '@/utils/nav-links'
 import Link from 'next/link'
 import {
@@ -36,9 +36,7 @@ const LinksDropdown = () => {
             </DropdownMenuItem>
           ))}
           <DropdownMenuItem>
-            <SignOutButton>
-              <span className='capitalize w-full cursor-pointer'>Logout</span>
-            </SignOutButton>
+            <SignOutLink />
           </DropdownMenuItem>
         </SignedIn>
         <SignedOut>
