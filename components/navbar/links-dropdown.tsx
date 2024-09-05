@@ -4,6 +4,7 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu'
 import { SignOutLink, UserIcon } from './'
@@ -35,6 +36,7 @@ const LinksDropdown = () => {
               </Link>
             </DropdownMenuItem>
           ))}
+          <DropdownMenuSeparator />
           <DropdownMenuItem>
             <SignOutLink />
           </DropdownMenuItem>
@@ -50,6 +52,9 @@ const LinksDropdown = () => {
               Rentals
             </Link>
           </DropdownMenuItem>
+
+          <DropdownMenuSeparator />
+
           <DropdownMenuItem>
             <SignInButton mode='modal'>
               <button className='capitalize w-full text-left'>
