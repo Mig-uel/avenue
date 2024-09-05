@@ -1,4 +1,4 @@
-import { DarkMode, LinksDropdown, Logo, NavSearch, SignOutLink } from '.'
+import { DarkMode, LinksDropdown, Logo, NavSearch } from '.'
 
 const Navbar = () => {
   return (
