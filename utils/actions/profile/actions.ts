@@ -16,6 +16,14 @@ const getAuthUser = async () => {
   return user
 }
 
+const errorMessage = (error: unknown): { message: string } => {
+  console.log(error)
+
+  return {
+    message: error instanceof Error ? error.message : 'Something went wrong...',
+  }
+}
+
 // create profile action
 export const createProfileAction: actionFunction = async (
   prevState: any,
@@ -50,10 +58,7 @@ export const createProfileAction: actionFunction = async (
       },
     })
   } catch (error: unknown) {
-    return {
-      message:
-        error instanceof Error ? error.message : 'Something went wrong...',
-    }
+    return errorMessage(error)
   }
 
   return redirect('/')
@@ -69,7 +74,7 @@ export const updateProfileAction: actionFunction = async (
       message: 'update profile action',
     }
   } catch (error) {
-    return { message: 'Something went wrong...' }
+    return errorMessage(error)
   }
 }
 
