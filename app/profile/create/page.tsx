@@ -4,8 +4,18 @@ import FormContainer from '@/components/form/form-container.component'
 
 // form action
 import { createProfileAction } from '@/utils/actions/profile/actions'
+import { currentUser } from '@clerk/nextjs/server'
+import { redirect } from 'next/navigation'
 
-const CreateProfilePage = () => {
+const CreateProfilePage = async () => {
+  const user = await currentUser()
+
+  if (!user) throw new Error()
+
+  const privateMetadata = user?.privateMetadata
+
+  if (privateMetadata.hasProfile) redirect('/')
+
   return (
     <section>
       <h1 className='text-2xl font-semibold mb-8 capitalize'>Create Profile</h1>
