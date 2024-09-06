@@ -90,11 +90,18 @@ export const updateProfileAction: actionFunction = async (
     const formDataObject = Object.fromEntries(formData)
 
     // validate the object that contains the formData
-    const validatedFields = profileSchema.parse(formDataObject)
+    const validatedFields = profileSchema.safeParse(formDataObject)
+
+    // check zod validation output
+    if (!validatedFields.success) {
+      const errors = validatedFields.error.errors.map((e) => e.message)
+
+      throw new Error(errors.join(' | '))
+    }
 
     const isUsernameTaken = await db.profile.findFirst({
       where: {
-        username: validatedFields.username,
+        username: validatedFields.data.username,
       },
     })
 
@@ -107,7 +114,7 @@ export const updateProfileAction: actionFunction = async (
       where: {
         clerkId: user.id,
       },
-      data: validatedFields,
+      data: validatedFields.data,
     })
 
     revalidatePath('/profile')
