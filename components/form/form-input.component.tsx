@@ -9,7 +9,7 @@ type FormInputProps = {
   placeholder?: string
 }
 
-const ProfilePage = ({
+const FormInput = ({
   name,
   type,
   label,
@@ -26,9 +26,10 @@ const ProfilePage = ({
         name={name}
         type={type}
         placeholder={placeholder || ''}
+        defaultValue={defaultValue || ''}
         required
       />
     </div>
   )
 }
-export default ProfilePage
+export default FormInput
