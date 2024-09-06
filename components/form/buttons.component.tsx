@@ -10,7 +10,7 @@ type SubmitButtonProps = {
   loadingText?: string
 }
 
-export const SubmitButton = ({
+const SubmitButton = ({
   className = '',
   text = 'submit',
   loadingText = 'Submitting...',
@@ -35,3 +35,5 @@ export const SubmitButton = ({
     </Button>
   )
 }
+
+export default SubmitButton
