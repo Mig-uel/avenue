@@ -2,19 +2,16 @@ import SubmitButton from '@/components/form/buttons.component'
 import FormInput from '@/components/form/form-input.component'
 import FormContainer from '@/components/form/form-container.component'
 
-// form action
-import { createProfileAction } from '@/utils/actions/profile/actions'
 import { currentUser } from '@clerk/nextjs/server'
 import { redirect } from 'next/navigation'
+
+// form action
+import { createProfileAction } from '@/utils/actions/profile/actions'
 
 const CreateProfilePage = async () => {
   const user = await currentUser()
 
-  if (!user) throw new Error()
-
-  const privateMetadata = user?.privateMetadata
-
-  if (privateMetadata.hasProfile) redirect('/')
+  if (user?.privateMetadata.hasProfile) redirect('/')
 
   return (
     <section>
