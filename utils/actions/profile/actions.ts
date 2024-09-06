@@ -16,6 +16,7 @@ const getAuthUser = async () => {
   return user
 }
 
+// create profile action
 export const createProfileAction: actionFunction = async (
   prevState: any,
   formData: FormData
@@ -56,6 +57,20 @@ export const createProfileAction: actionFunction = async (
   }
 
   return redirect('/')
+}
+
+// update profile action
+export const updateProfileAction: actionFunction = async (
+  prevState: any,
+  formData: FormData
+): Promise<{ message: string }> => {
+  try {
+    return {
+      message: 'update profile action',
+    }
+  } catch (error) {
+    return { message: 'Something went wrong...' }
+  }
 }
 
 // fetch profile image from supabase
