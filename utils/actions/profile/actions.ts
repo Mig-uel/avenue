@@ -5,6 +5,7 @@ import db from '../../db'
 import { profileSchema } from '../../schemas'
 import type { actionFunction } from '@/utils/types'
 import { redirect } from 'next/navigation'
+import { revalidatePath } from 'next/cache'
 
 const getAuthUser = async () => {
   const user = await currentUser()
@@ -82,8 +83,37 @@ export const updateProfileAction: actionFunction = async (
   formData: FormData
 ): Promise<{ message: string }> => {
   try {
+    // get user from clerk
+    const user = await getAuthUser()
+
+    // create object from formData
+    const formDataObject = Object.fromEntries(formData)
+
+    // validate the object that contains the formData
+    const validatedFields = profileSchema.parse(formDataObject)
+
+    const isUsernameTaken = await db.profile.findFirst({
+      where: {
+        username: validatedFields.username,
+      },
+    })
+
+    if (isUsernameTaken && isUsernameTaken.clerkId !== user.id)
+      return {
+        message: 'Username is not available',
+      }
+
+    await db.profile.update({
+      where: {
+        clerkId: user.id,
+      },
+      data: validatedFields,
+    })
+
+    revalidatePath('/profile')
+
     return {
-      message: 'update profile action',
+      message: 'Profile updated',
     }
   } catch (error) {
     return errorMessage(error)
