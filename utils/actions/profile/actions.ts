@@ -41,6 +41,18 @@ export const createProfileAction: actionFunction = async (
     // validate formData fields
     const validatedFields = profileSchema.parse(formDataObject)
 
+    const isUsernameTaken = await db.profile.findFirst({
+      where: {
+        username: validatedFields.username,
+      },
+    })
+
+    // check if username exists
+    if (isUsernameTaken)
+      return {
+        message: 'Username is not available',
+      }
+
     // create new user profile in db using info from clerk and formdata
     await db.profile.create({
       data: {
