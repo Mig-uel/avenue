@@ -1,22 +1,9 @@
 import SubmitButton from '@/components/form/buttons.component'
 import FormInput from '@/components/form/form-input.component'
 import FormContainer from '@/components/form/form-container.component'
-import type { actionFunction } from '@/utils/types'
 
-const createProfileAction: actionFunction = async (
-  prevState: any,
-  formData: FormData
-) => {
-  'use server'
-
-  const formDataObject = Object.fromEntries(formData)
-
-  console.log(formDataObject)
-
-  return {
-    message: 'Profile created.',
-  }
-}
+// form action
+import { createProfileAction } from '@/utils/actions/profile/actions'
 
 const CreateProfilePage = () => {
   return (
