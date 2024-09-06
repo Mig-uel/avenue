@@ -1,6 +1,5 @@
 import { SubmitButton } from '@/components/form/buttons.component'
 import FormInput from '@/components/form/form-input.component'
-import { Button } from '@/components/ui/button'
 
 const createProfileAction = async (formData: FormData) => {
   'use server'
