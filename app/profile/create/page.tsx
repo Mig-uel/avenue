@@ -8,22 +8,36 @@ const createProfileAction = async (formData: FormData) => {
   const formDataObject = Object.fromEntries(formData)
 
   console.log(formDataObject)
+
+  return {
+    message: 'Profile created.',
+  }
 }
 
 const CreateProfilePage = () => {
   return (
     <section>
-      <h1 className='text-2xl font-semibold mb-8 capitalize'>New User</h1>
-      <div className='border p-8 rounded-md max-w-lg'>
+      <h1 className='text-2xl font-semibold mb-8 capitalize'>Create Profile</h1>
+      <div className='border p-8 rounded-md'>
         <form action={createProfileAction}>
-          <FormInput
-            name='firstName'
-            label='First Name'
-            type='text'
-            placeholder='John'
-          />
+          <div className='grid md:grid-cols-2 gap-4 mt-4'>
+            <FormInput
+              name='firstName'
+              label='First Name'
+              type='text'
+              placeholder='John'
+            />
 
-          <SubmitButton />
+            <FormInput
+              name='lastName'
+              label='Last Name'
+              type='text'
+              placeholder='Doe'
+            />
+
+            <FormInput name='username' type='text' placeholder='johndoe' />
+          </div>
+          <SubmitButton text='Create Profile' className='mt-8' />
         </form>
       </div>
     </section>
