@@ -7,11 +7,13 @@ import { ReloadIcon } from '@radix-ui/react-icons'
 type SubmitButtonProps = {
   className?: string
   text?: string
+  loadingText?: string
 }
 
 export const SubmitButton = ({
   className = '',
   text = 'submit',
+  loadingText = 'Submitting...',
 }: SubmitButtonProps) => {
   const { pending } = useFormStatus()
 
@@ -25,7 +27,7 @@ export const SubmitButton = ({
       {pending ? (
         <>
           <ReloadIcon className='mr-2 h-4 w-4 animate-spin' />
-          Loading...
+          {loadingText}
         </>
       ) : (
         text
