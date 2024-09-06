@@ -84,7 +84,17 @@ export const fetchProfileImage = async () => {
   return profile.profileImage
 }
 
-
+// fetch user from clerk, and, fetch their profile from supabase
 export const fetchProfile = async () => {
   const user = await getAuthUser()
+
+  const profile = await db.profile.findUnique({
+    where: {
+      clerkId: user.id,
+    },
+  })
+
+  if (!profile) return redirect('/profile/create')
+
+  return profile
 }
