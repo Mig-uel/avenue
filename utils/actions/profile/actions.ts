@@ -6,6 +6,16 @@ import { profileSchema } from '../../schemas'
 import type { actionFunction } from '@/utils/types'
 import { redirect } from 'next/navigation'
 
+const getAuthUser = async () => {
+  const user = await currentUser()
+
+  if (!user) throw new Error('You must be logged in to access this route')
+
+  if (!user.privateMetadata.hasProfile) return redirect('/profile/create')
+
+  return user
+}
+
 export const createProfileAction: actionFunction = async (
   prevState: any,
   formData: FormData
@@ -48,11 +58,16 @@ export const createProfileAction: actionFunction = async (
   return redirect('/')
 }
 
+// fetch profile image from supabase
 export const fetchProfileImage = async () => {
+  // get user info from clerk
   const user = await currentUser()
 
+  // if no user, return null
   if (!user) return null
 
+  // find user profile where clerkId === user.id from clerk and
+  // select profileImage
   const profile = await db.profile.findUnique({
     where: {
       clerkId: user.id,
@@ -62,5 +77,14 @@ export const fetchProfileImage = async () => {
     },
   })
 
-  return profile?.profileImage
+  // if no profileImage, return null
+  if (!profile?.profileImage) return null
+
+  // return profile image
+  return profile.profileImage
+}
+
+
+export const fetchProfile = async () => {
+  const user = await getAuthUser()
 }
