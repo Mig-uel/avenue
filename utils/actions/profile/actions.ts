@@ -2,7 +2,7 @@
 
 import { clerkClient, currentUser } from '@clerk/nextjs/server'
 import db from '../../db'
-import { profileSchema } from '../../schemas'
+import { profileSchema, validateWithZodSchema } from '../../schemas'
 import type { actionFunction } from '@/utils/types'
 import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
@@ -39,8 +39,8 @@ export const createProfileAction: actionFunction = async (
     // create object from formdata
     const formDataObject = Object.fromEntries(formData)
 
-    // validate formData fields
-    const validatedFields = profileSchema.parse(formDataObject)
+    // use generic validate helper function
+    const validatedFields = validateWithZodSchema(profileSchema, formDataObject)
 
     const isUsernameTaken = await db.profile.findFirst({
       where: {
@@ -89,19 +89,12 @@ export const updateProfileAction: actionFunction = async (
     // create object from formData
     const formDataObject = Object.fromEntries(formData)
 
-    // validate the object that contains the formData
-    const validatedFields = profileSchema.safeParse(formDataObject)
-
-    // check zod validation output
-    if (!validatedFields.success) {
-      const errors = validatedFields.error.errors.map((e) => e.message)
-
-      throw new Error(errors.join(' | '))
-    }
+    // use generic validate helper function
+    const validatedFields = validateWithZodSchema(profileSchema, formDataObject)
 
     const isUsernameTaken = await db.profile.findFirst({
       where: {
-        username: validatedFields.data.username,
+        username: validatedFields.username,
       },
     })
 
@@ -114,7 +107,7 @@ export const updateProfileAction: actionFunction = async (
       where: {
         clerkId: user.id,
       },
-      data: validatedFields.data,
+      data: validatedFields,
     })
 
     revalidatePath('/profile')
