@@ -1,7 +1,12 @@
-import { SubmitButton } from '@/components/form/buttons.component'
+import SubmitButton from '@/components/form/buttons.component'
 import FormInput from '@/components/form/form-input.component'
+import FormContainer from '@/components/form/form-container.component'
+import type { actionFunction } from '@/utils/types'
 
-const createProfileAction = async (formData: FormData) => {
+const createProfileAction: actionFunction = async (
+  prevState: any,
+  formData: FormData
+) => {
   'use server'
 
   const formDataObject = Object.fromEntries(formData)
@@ -18,7 +23,7 @@ const CreateProfilePage = () => {
     <section>
       <h1 className='text-2xl font-semibold mb-8 capitalize'>Create Profile</h1>
       <div className='border p-8 rounded-md'>
-        <form action={createProfileAction}>
+        <FormContainer action={createProfileAction}>
           <div className='grid md:grid-cols-2 gap-4 mt-4'>
             <FormInput
               name='firstName'
@@ -37,7 +42,7 @@ const CreateProfilePage = () => {
             <FormInput name='username' type='text' placeholder='johndoe' />
           </div>
           <SubmitButton text='Create Profile' className='mt-8' />
-        </form>
+        </FormContainer>
       </div>
     </section>
   )
