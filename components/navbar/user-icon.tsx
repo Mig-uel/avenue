@@ -1,8 +1,24 @@
+import { fetchProfileImage } from '@/utils/actions/profile/actions'
 import { CircleUserRound } from 'lucide-react'
+import Image from 'next/image'
 
-const UserIcon = () => {
+const UserIcon = async () => {
+  const profileImage = await fetchProfileImage()
+
   return (
-    <CircleUserRound className='w-6 h-6 bg-primary rounded-full text-white' />
+    <>
+      {profileImage ? (
+        <Image
+          alt='profile image'
+          src={profileImage}
+          width={24}
+          height={24}
+          className='rounded-full object-cover'
+        />
+      ) : (
+        <CircleUserRound className='w-6 h-6 bg-primary rounded-full text-white' />
+      )}
+    </>
   )
 }
 
