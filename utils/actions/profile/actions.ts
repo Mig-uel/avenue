@@ -10,7 +10,12 @@ import {
 import type { actionFunction } from '@/utils/types'
 import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
+import { removeOldImage, uploadImage } from '@/utils/supabase'
 
+/**
+ * GET USER DATA FROM CLERK
+ * @returns
+ */
 const getAuthUser = async () => {
   const user = await currentUser()
 
@@ -130,9 +135,37 @@ export const updateProfileImageAction: actionFunction = async (
   formData: FormData
 ) => {
   try {
+    const user = await getAuthUser()
     const image = formData.get('image') as File
 
     const validatedFields = validateWithZodSchema(imageSchema, { image })
+
+    const newImagePath = await uploadImage(validatedFields.image)
+
+    /* --------------------- */
+    // get user from supabase
+    const userFromDb = await db.profile.findUnique({
+      where: {
+        clerkId: user.id,
+      },
+    })
+
+    if (!userFromDb) throw new Error('User not found')
+
+    const oldImage = userFromDb.profileImage
+    await removeOldImage(oldImage)
+    /* --------------------- */
+
+    await db.profile.update({
+      where: {
+        clerkId: user.id,
+      },
+      data: {
+        profileImage: newImagePath,
+      },
+    })
+
+    revalidatePath('/profile')
 
     return { message: 'Profile image updated' }
   } catch (error) {
