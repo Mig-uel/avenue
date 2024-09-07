@@ -120,6 +120,18 @@ export const updateProfileAction: actionFunction = async (
   }
 }
 
+// updateProfileImageAction
+export const updateProfileImageAction: actionFunction = async (
+  prevState: any,
+  formData: FormData
+) => {
+  try {
+    return { message: 'profile image updated' }
+  } catch (error) {
+    return errorMessage(error)
+  }
+}
+
 // fetch profile image from supabase
 export const fetchProfileImage = async () => {
   // get user info from clerk
