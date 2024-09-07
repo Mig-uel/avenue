@@ -27,6 +27,10 @@ const validateFile = () => {
     }, 'File must be an image')
 }
 
+/** PROFILE IMAGE INPUT SCHEMA */
+export const imageSchema = z.object({
+  image: validateFile(),
+})
 
 // generic zod validator helper function
 export const validateWithZodSchema = <T>(
