@@ -20,3 +20,17 @@ export const uploadImage = async (image: File) => {
 
   return supabase.storage.from(bucket).getPublicUrl(imageName).data.publicUrl
 }
+
+// TODO: FIX REMOVE OLD IMAGE FUNCTIONALITY
+export const removeOldImage = async (imageURL: string) => {
+  const imageURLArray = imageURL.split('/')
+
+  const fileToDelete = `${imageURLArray.pop()}`
+
+  const { data, error } = await supabase.storage
+    .from(bucket)
+    .remove([fileToDelete])
+
+  console.log(data)
+  console.log(error)
+}
