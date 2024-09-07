@@ -8,12 +8,14 @@ type SubmitButtonProps = {
   className?: string
   text?: string
   loadingText?: string
+  size?: 'default' | 'lg' | 'sm'
 }
 
 const SubmitButton = ({
   className = '',
   text = 'submit',
   loadingText = 'Submitting...',
+  size = 'lg',
 }: SubmitButtonProps) => {
   const { pending } = useFormStatus()
 
@@ -22,7 +24,7 @@ const SubmitButton = ({
       type='submit'
       disabled={pending}
       className={`capitalize ${className}`}
-      size='lg'
+      size={size}
     >
       {pending ? (
         <>
