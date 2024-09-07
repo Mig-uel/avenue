@@ -10,6 +10,24 @@ export const profileSchema = z.object({
     .max(12, { message: 'Username is too long' }),
 })
 
+// validate image file size and type helper function for zod
+const validateFile = () => {
+  const maxUploadSize = 1024 * 1024
+  const acceptedFileTypes = ['image/']
+
+  return z
+    .instanceof(File)
+    .refine((file) => {
+      return !file || file.size <= maxUploadSize
+    }, 'File size must be less than 1 MB')
+    .refine((file) => {
+      return (
+        !file || acceptedFileTypes.some((type) => file.type.startsWith(type))
+      )
+    }, 'File must be an image')
+}
+
+
 // generic zod validator helper function
 export const validateWithZodSchema = <T>(
   schema: ZodSchema<T>,
