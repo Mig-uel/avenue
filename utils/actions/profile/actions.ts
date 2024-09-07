@@ -2,7 +2,11 @@
 
 import { clerkClient, currentUser } from '@clerk/nextjs/server'
 import db from '../../db'
-import { profileSchema, validateWithZodSchema } from '../../schemas'
+import {
+  imageSchema,
+  profileSchema,
+  validateWithZodSchema,
+} from '../../schemas'
 import type { actionFunction } from '@/utils/types'
 import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
@@ -126,7 +130,11 @@ export const updateProfileImageAction: actionFunction = async (
   formData: FormData
 ) => {
   try {
-    return { message: 'profile image updated' }
+    const image = formData.get('image') as File
+
+    const validatedFields = validateWithZodSchema(imageSchema, { image })
+
+    return { message: 'Profile image updated' }
   } catch (error) {
     return errorMessage(error)
   }
