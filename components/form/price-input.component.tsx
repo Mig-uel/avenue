@@ -19,6 +19,7 @@ const PriceInput = ({ defaultValue }: PriceInput) => {
         className='border'
         placeholder='100'
         required
+        defaultValue={defaultValue}
       />
     </div>
   )
