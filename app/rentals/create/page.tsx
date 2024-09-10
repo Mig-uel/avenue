@@ -3,7 +3,11 @@ import CategoriesInput from '@/components/form/categories-input.component'
 import FormContainer from '@/components/form/form-container.component'
 import FormInput from '@/components/form/form-input.component'
 import PriceInput from '@/components/form/price-input.component'
+import TextAreaInput from '@/components/form/text-area.component'
 import { createPropertyAction } from '@/utils/actions/property/action'
+
+const placeholder =
+  'Nestled deep in the heart of upstate New York, this eerie Victorian mansion stands as a chilling testament to the supernatural. Shrouded in mist and surrounded by ancient, gnarled trees, the property exudes an unsettling aura, with creaking floors and whispers echoing through its dusty halls. The once-grand estate, now cloaked in cobwebs and shadows, is rumored to be haunted by restless spirits from a forgotten past. With its flickering candlelight and the distant wail of a mournful wind, this haunted abode invites only the bravest souls to uncover its dark secrets.'
 
 const CreatePropertyPage = () => {
   return (
@@ -30,7 +34,8 @@ const CreatePropertyPage = () => {
             <PriceInput />
             <CategoriesInput />
           </div>
-          {/* TODO: text area / description */}
+
+          <TextAreaInput name='description' placeholder={placeholder} />
           <SubmitButton text='create rental' className='mt-12' />
         </FormContainer>
       </div>
