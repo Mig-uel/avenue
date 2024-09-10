@@ -1,7 +1,9 @@
 import SubmitButton from '@/components/form/buttons.component'
 import CategoriesInput from '@/components/form/categories-input.component'
+import CountriesInput from '@/components/form/countries-input.component'
 import FormContainer from '@/components/form/form-container.component'
 import FormInput from '@/components/form/form-input.component'
+import ImageInput from '@/components/form/image-input.component'
 import PriceInput from '@/components/form/price-input.component'
 import TextAreaInput from '@/components/form/text-area.component'
 import { createPropertyAction } from '@/utils/actions/property/action'
@@ -33,6 +35,11 @@ const CreatePropertyPage = () => {
             />
             <PriceInput />
             <CategoriesInput />
+          </div>
+
+          <div className='grid sm:grid-cols-2 gap-8 mt-4'>
+            <CountriesInput />
+            <ImageInput />
           </div>
 
           <TextAreaInput name='description' placeholder={placeholder} />
