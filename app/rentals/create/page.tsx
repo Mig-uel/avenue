@@ -25,7 +25,7 @@ const CreatePropertyPage = () => {
             <FormInput
               name='tagline'
               type='text'
-              placeholder='Spooky Woody Cabin'
+              placeholder='Spookiest Woody Cabin'
             />
             <PriceInput />
             <CategoriesInput />
