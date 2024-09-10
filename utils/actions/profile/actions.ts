@@ -11,28 +11,7 @@ import type { actionFunction } from '@/utils/types'
 import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
 import { removeOldImage, uploadImage } from '@/utils/supabase'
-
-/**
- * GET USER DATA FROM CLERK
- * @returns
- */
-const getAuthUser = async () => {
-  const user = await currentUser()
-
-  if (!user) throw new Error('You must be logged in to access this route')
-
-  if (!user.privateMetadata.hasProfile) return redirect('/profile/create')
-
-  return user
-}
-
-const errorMessage = (error: unknown): { message: string } => {
-  console.log(error)
-
-  return {
-    message: error instanceof Error ? error.message : 'Something went wrong...',
-  }
-}
+import { errorMessage, getAuthUser } from '@/utils/functions.utils'
 
 // create profile action
 export const createProfileAction: actionFunction = async (
