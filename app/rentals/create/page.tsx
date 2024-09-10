@@ -1,4 +1,5 @@
 import SubmitButton from '@/components/form/buttons.component'
+import CategoriesInput from '@/components/form/categories-input.component'
 import FormContainer from '@/components/form/form-container.component'
 import FormInput from '@/components/form/form-input.component'
 import PriceInput from '@/components/form/price-input.component'
@@ -27,7 +28,7 @@ const CreatePropertyPage = () => {
               placeholder='Spooky Woody Cabin'
             />
             <PriceInput />
-            {/* TODO: categories */}
+            <CategoriesInput />
           </div>
           {/* TODO: text area / description */}
           <SubmitButton text='create rental' className='mt-12' />
