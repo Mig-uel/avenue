@@ -1,3 +1,5 @@
+'use server'
+
 import type { actionFunction } from '@/utils/types'
 
 import { propertySchema, validateWithZodSchema } from '@/utils/schemas'
