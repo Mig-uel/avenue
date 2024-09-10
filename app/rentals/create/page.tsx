@@ -1,6 +1,7 @@
 import SubmitButton from '@/components/form/buttons.component'
 import FormContainer from '@/components/form/form-container.component'
 import FormInput from '@/components/form/form-input.component'
+import PriceInput from '@/components/form/price-input.component'
 import { createPropertyAction } from '@/utils/actions/property/action'
 
 const CreatePropertyPage = () => {
@@ -15,9 +16,17 @@ const CreatePropertyPage = () => {
 
         <FormContainer action={createPropertyAction}>
           <div className='grid md:grid-cols-2 gap-8 mb-4'>
-            <FormInput name='name' type='text' />
-            <FormInput name='tagline' type='text' />
-            {/* TODO: price */}
+            <FormInput
+              name='name'
+              type='text'
+              placeholder='Cabin in Upstate New York'
+            />
+            <FormInput
+              name='tagline'
+              type='text'
+              placeholder='Spooky Woody Cabin'
+            />
+            <PriceInput />
             {/* TODO: categories */}
           </div>
           {/* TODO: text area / description */}
