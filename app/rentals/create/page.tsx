@@ -1,5 +1,6 @@
 import SubmitButton from '@/components/form/buttons.component'
 import CategoriesInput from '@/components/form/categories-input.component'
+import CounterInput from '@/components/form/counter-input.component'
 import CountriesInput from '@/components/form/countries-input.component'
 import FormContainer from '@/components/form/form-container.component'
 import FormInput from '@/components/form/form-input.component'
@@ -23,26 +24,47 @@ const CreatePropertyPage = () => {
 
         <FormContainer action={createPropertyAction}>
           <div className='grid md:grid-cols-2 gap-8 mb-4'>
+            {/* name input */}
             <FormInput
               name='name'
               type='text'
               placeholder='Cabin in Upstate New York'
             />
+
+            {/* tagline input */}
             <FormInput
               name='tagline'
               type='text'
               placeholder='Spookiest Woody Cabin'
             />
+
+            {/* price input */}
             <PriceInput />
+
+            {/* category input */}
             <CategoriesInput />
           </div>
 
           <div className='grid sm:grid-cols-2 gap-8 mt-4'>
+            {/* country input */}
             <CountriesInput />
+
+            {/* image input */}
             <ImageInput />
           </div>
 
+          {/* description input */}
           <TextAreaInput name='description' placeholder={placeholder} />
+
+          {/* accommodation details */}
+          <h3 className='text-lg mt-8 mb-4 font-medium'>
+            Accommodation Details
+          </h3>
+          <CounterInput detail='guests' />
+          <CounterInput detail='bedrooms' />
+          <CounterInput detail='beds' />
+          <CounterInput detail='baths' />
+
           <SubmitButton text='create rental' className='mt-12' />
         </FormContainer>
       </div>
