@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import PropertyRating from './property-rating.component'
 import FavoriteButton from './favorite-button.component'
+import CountryName from './country-name.component'
 
 function PropertyCard({
   name,
@@ -40,7 +41,7 @@ function PropertyCard({
             {<span className='font-semibold'>{formatCurrency(price)}</span>}
             /night
           </p>
-          {/* TODO: country */}
+          <CountryName countryCode={country} />
         </div>
       </Link>
       <div className='absolute right-5 top-5 z-5'>
