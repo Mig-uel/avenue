@@ -2,6 +2,7 @@ import { formatCurrency } from '@/utils/format'
 import { PropertyCardProps } from '@/utils/types'
 import Image from 'next/image'
 import Link from 'next/link'
+import PropertyRating from './property-rating.component'
 
 function PropertyCard({
   name,
@@ -28,7 +29,7 @@ function PropertyCard({
           <h3 className='text-sm font-semibold mt-1'>
             {name.substring(0, 30)}
           </h3>
-          {/* TODO: property rating */}
+          <PropertyRating inPage={false} propertyId={propertyId} />
         </div>
         <p className='text-sm mt-1 text-muted-foreground'>
           {tagline.substring(0, 40)}
