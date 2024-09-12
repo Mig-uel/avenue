@@ -24,7 +24,9 @@ const CounterInput = ({ detail, defaultValue }: CounterInput) => {
 
   return (
     <Card className='mb-4'>
-      {/* input */}
+      {/* hidden input for form */}
+      <input type='hidden' name={detail} value={count} />
+
       <CardHeader className='flex flex-col gap-y-5'>
         <div className='flex item-center justify-between flex-wrap'>
           <div className='flex flex-col'>
