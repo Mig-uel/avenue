@@ -12,13 +12,20 @@ export const uploadImage = async (image: File, folder = '') => {
 
   const imageName = `${timestamp}.${imageNameArray.pop()}`
 
+  let imageNameWithFolder = imageName
+
+  if (folder) {
+    imageNameWithFolder = `${folder}/${imageName}`
+  }
+
   const { data } = await supabase.storage
     .from(bucket)
-    .upload(`${folder}/${imageName}`, image, { cacheControl: '0' })
+    .upload(imageNameWithFolder, image, { cacheControl: '0' })
 
   if (!data) throw new Error('Image upload failed')
 
-  return supabase.storage.from(bucket).getPublicUrl(imageName).data.publicUrl
+  return supabase.storage.from(bucket).getPublicUrl(imageNameWithFolder).data
+    .publicUrl
 }
 
 // TODO: FIX REMOVE OLD IMAGE FUNCTIONALITY
