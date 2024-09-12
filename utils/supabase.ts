@@ -6,7 +6,7 @@ const key = process.env.SUPABASE_PUBLIC_KEY as string
 
 const supabase = createClient(url, key)
 
-export const uploadImage = async (image: File) => {
+export const uploadImage = async (image: File, folder = '') => {
   const timestamp = Date.now()
   const imageNameArray = image.name.split('.')
 
@@ -14,7 +14,7 @@ export const uploadImage = async (image: File) => {
 
   const { data } = await supabase.storage
     .from(bucket)
-    .upload(imageName, image, { cacheControl: '0' })
+    .upload(`${folder}/${imageName}`, image, { cacheControl: '0' })
 
   if (!data) throw new Error('Image upload failed')
 
