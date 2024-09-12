@@ -3,7 +3,7 @@ export type actionFunction = (
   formData: FormData
 ) => Promise<{ message: string }>
 
-export type PropertyCard = {
+export type PropertyCardProps = {
   image: string
   id: string
   name: string
