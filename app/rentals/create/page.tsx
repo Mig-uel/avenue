@@ -1,3 +1,4 @@
+import AmenitiesInput from '@/components/form/amenities-input.component'
 import SubmitButton from '@/components/form/buttons.component'
 import CategoriesInput from '@/components/form/categories-input.component'
 import CounterInput from '@/components/form/counter-input.component'
@@ -64,6 +65,10 @@ const CreatePropertyPage = () => {
           <CounterInput detail='bedrooms' />
           <CounterInput detail='beds' />
           <CounterInput detail='baths' />
+
+          {/* amenities */}
+          <h3 className='text-lg mt-10 mb-6 font-medium'>Amenities</h3>
+          <AmenitiesInput />
 
           <SubmitButton text='create rental' className='mt-12' />
         </FormContainer>
