@@ -13,7 +13,10 @@ export const fetchProperties = async ({
       category,
       OR: [
         {
-          name: { contains: search, mode: 'insensitive' },
+          name: {
+            contains: search,
+            mode: 'insensitive',
+          },
           tagline: { contains: search, mode: 'insensitive' },
         },
       ],
