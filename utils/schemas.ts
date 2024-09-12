@@ -12,7 +12,7 @@ export const profileSchema = z.object({
 
 // validate image file size and type helper function for zod
 const validateFile = () => {
-  const maxUploadSize = 1024 * 1024
+  const maxUploadSize = 5242880
   const acceptedFileTypes = ['image/']
 
   return z
