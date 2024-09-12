@@ -1,5 +1,5 @@
 import { fetchProperties } from '@/utils/actions/home/action'
-import { PropertyCard } from '@/utils/types'
+import type { PropertyCard } from '@/utils/types'
 import EmptyList from './empty-list.component'
 import PropertiesList from './properties-list.component'
 
