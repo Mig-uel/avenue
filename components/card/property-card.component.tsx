@@ -3,6 +3,7 @@ import { PropertyCardProps } from '@/utils/types'
 import Image from 'next/image'
 import Link from 'next/link'
 import PropertyRating from './property-rating.component'
+import FavoriteButton from './favorite-button.component'
 
 function PropertyCard({
   name,
@@ -43,7 +44,7 @@ function PropertyCard({
         </div>
       </Link>
       <div className='absolute right-5 top-5 z-5'>
-        {/* TODO: favorite toggle button */}
+        <FavoriteButton propertyId={propertyId} />
       </div>
     </article>
   )
