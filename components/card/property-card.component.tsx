@@ -14,7 +14,6 @@ function PropertyCard({
   id: propertyId,
   tagline,
 }: PropertyCardProps) {
-  console.log(image)
   return (
     <article className='group relative'>
       <Link href={`/properties/${propertyId}`}>
