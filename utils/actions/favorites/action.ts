@@ -1,3 +1,5 @@
+'use server'
+
 import db from '../../db'
 import { getAuthUser } from '@/utils/functions.utils'
 
@@ -27,7 +29,15 @@ export const fetchFavoriteId = async ({
   }
 }
 
-export const toggleFavoriteAction = async () => {
+export const toggleFavoriteAction = async (prevState: {
+  propertyId: string
+  favoriteId: string | null | undefined
+  pathname: string
+}) => {
+  const { propertyId, favoriteId, pathname } = prevState
+
+  console.log(propertyId, favoriteId, pathname)
+
   return {
     message: 'favorite toggled',
   }
