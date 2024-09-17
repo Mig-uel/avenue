@@ -12,6 +12,12 @@ import { errorMessage, getAuthUser } from '@/utils/functions.utils'
 import { redirect } from 'next/navigation'
 import { uploadImage } from '@/utils/supabase'
 
+/**
+ * CREATE PROPERTY ACTION
+ * @param prevState
+ * @param formData
+ * @returns
+ */
 export const createPropertyAction: actionFunction = async (
   prevState: any,
   formData: FormData
@@ -44,10 +50,24 @@ export const createPropertyAction: actionFunction = async (
         profileId: user.id,
       },
     })
-
   } catch (error) {
     return errorMessage(error)
   }
 
   return redirect('/')
+}
+
+/**
+ * FETCH PROPERTY DETAILS
+ * @param id
+ */
+export const fetchPropertyDetails = async (id: string) => {
+  return db.property.findUnique({
+    where: {
+      id,
+    },
+    include: {
+      profile: true,
+    },
+  })
 }
