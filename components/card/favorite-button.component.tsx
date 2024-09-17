@@ -1,19 +1,17 @@
 'use server'
 
 import { auth } from '@clerk/nextjs/server'
-import { FaHeart } from 'react-icons/fa'
-import { Button } from '../ui/button'
 import { CardSignInButton } from '../form/buttons.component'
+import { fetchFavoriteId } from '@/utils/actions/favorites/action'
+import FavoriteButtonForm from './favorite-button-form.component'
 
-const FavoriteButton = ({ propertyId }: { propertyId: string }) => {
+const FavoriteButton = async ({ propertyId }: { propertyId: string }) => {
   const { userId } = auth()
 
   if (!userId) return <CardSignInButton />
 
-  return (
-    <Button size='icon' variant='outline' className='p-2 cursor-pointer'>
-      <FaHeart />
-    </Button>
-  )
+  const favoriteId = await fetchFavoriteId({ propertyId })
+
+  return <FavoriteButtonForm favoriteId={favoriteId} propertyId={propertyId} />
 }
 export default FavoriteButton
