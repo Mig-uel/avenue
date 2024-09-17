@@ -1,7 +1,8 @@
 'use server'
 
+import { revalidatePath } from 'next/cache'
 import db from '../../db'
-import { getAuthUser } from '@/utils/functions.utils'
+import { errorMessage, getAuthUser } from '@/utils/functions.utils'
 
 export const fetchFavoriteId = async ({
   propertyId,
@@ -34,11 +35,29 @@ export const toggleFavoriteAction = async (prevState: {
   favoriteId: string | null | undefined
   pathname: string
 }) => {
-  const { propertyId, favoriteId, pathname } = prevState
+  const { favoriteId, pathname, propertyId } = prevState
+  try {
+    const user = await getAuthUser()
 
-  console.log(propertyId, favoriteId, pathname)
+    if (favoriteId)
+      await db.favorite.delete({
+        where: {
+          id: favoriteId,
+        },
+      })
+    else
+      await db.favorite.create({
+        data: {
+          propertyId,
+          profileId: user.id,
+        },
+      })
 
-  return {
-    message: 'favorite toggled',
+    revalidatePath(pathname)
+    return {
+      message: favoriteId ? 'Removed from Favorites' : 'Added to Favorites',
+    }
+  } catch (error) {
+    return errorMessage(error)
   }
 }
