@@ -9,8 +9,18 @@ import PropertyDetails from '@/components/properties/property-details.component'
 import ShareButton from '@/components/properties/share-button.component'
 import UserInfo from '@/components/properties/user-info.component'
 import { Separator } from '@/components/ui/separator'
+import { Skeleton } from '@/components/ui/skeleton'
 import { fetchPropertyDetails } from '@/utils/actions/property/action'
+import dynamic from 'next/dynamic'
 import { redirect } from 'next/navigation'
+
+const DynamicMap = dynamic(
+  () => import('@/components/properties/map.component'),
+  {
+    ssr: false,
+    loading: () => <Skeleton className='h-[400px] w-full' />,
+  }
+)
 
 const PropertyDetailsPage = async ({
   params: { id },
@@ -60,6 +70,7 @@ const PropertyDetailsPage = async ({
           <Separator className='mt-4' />
           <Description description={description} />
           <Amenities amenities={property.amenities} />
+          <DynamicMap countryCode={property.country} />
         </div>
 
         <div className='lg:col-span-4 flex flex-col items-center'>
