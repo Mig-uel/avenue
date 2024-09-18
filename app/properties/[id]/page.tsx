@@ -5,6 +5,7 @@ import Breadcrumbs from '@/components/properties/breadcrumbs.component'
 import ImageContainer from '@/components/properties/image-container.component'
 import PropertyDetails from '@/components/properties/property-details.component'
 import ShareButton from '@/components/properties/share-button.component'
+import UserInfo from '@/components/properties/user-info.component'
 import { fetchPropertyDetails } from '@/utils/actions/property/action'
 import { redirect } from 'next/navigation'
 
@@ -17,7 +18,16 @@ const PropertyDetailsPage = async ({
 
   if (!property) redirect('/')
 
-  const { name, baths, bedrooms, beds, guests, tagline, image } = property
+  const {
+    name,
+    baths,
+    bedrooms,
+    beds,
+    guests,
+    tagline,
+    image,
+    profile: { firstName, profileImage },
+  } = property
   const details = { baths, bedrooms, beds, guests }
 
   return (
@@ -43,6 +53,7 @@ const PropertyDetailsPage = async ({
             <PropertyRating inPage propertyId={property.id} />
           </div>
           <PropertyDetails {...details} />
+          <UserInfo firstName={firstName} profileImageSrc={profileImage} />
         </div>
 
         <div className='lg:col-span-4 flex flex-col items-center'>
