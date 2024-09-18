@@ -9,7 +9,6 @@ import { Input } from '../ui/input'
 
 const NavSearch = () => {
   const searchParams = useSearchParams()
-  console.log(searchParams.toString())
   const pathname = usePathname()
   const { replace } = useRouter()
 
