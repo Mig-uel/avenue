@@ -9,7 +9,7 @@ const PriceInput = ({ defaultValue }: PriceInput) => {
   return (
     <div className='mb-2'>
       <Label htmlFor='price' className='capitalize'>
-        Price ($)
+        Nightly Price ($)
       </Label>
       <Input
         type='number'
