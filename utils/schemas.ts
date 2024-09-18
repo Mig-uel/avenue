@@ -12,14 +12,14 @@ export const profileSchema = z.object({
 
 // validate image file size and type helper function for zod
 const validateFile = () => {
-  const maxUploadSize = 4500000
+  const maxUploadSize = 3000000
   const acceptedFileTypes = ['image/']
 
   return z
     .instanceof(File)
     .refine((file) => {
       return !file || file.size <= maxUploadSize
-    }, 'File size must be less than 1 MB')
+    }, 'File size must be less than 3 MB')
     .refine((file) => {
       return (
         !file || acceptedFileTypes.some((type) => file.type.startsWith(type))
