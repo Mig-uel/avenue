@@ -3,6 +3,7 @@ import PropertyRating from '@/components/card/property-rating.component'
 import BookingCalendar from '@/components/properties/booking-calendar.component'
 import Breadcrumbs from '@/components/properties/breadcrumbs.component'
 import ImageContainer from '@/components/properties/image-container.component'
+import PropertyDetails from '@/components/properties/property-details.component'
 import ShareButton from '@/components/properties/share-button.component'
 import { fetchPropertyDetails } from '@/utils/actions/property/action'
 import { redirect } from 'next/navigation'
@@ -41,6 +42,7 @@ const PropertyDetailsPage = async ({
             <h1 className='text-xl font-bold'>{property.name}</h1>
             <PropertyRating inPage propertyId={property.id} />
           </div>
+          <PropertyDetails {...details} />
         </div>
 
         <div className='lg:col-span-4 flex flex-col items-center'>
