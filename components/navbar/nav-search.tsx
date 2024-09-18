@@ -1,15 +1,14 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { Input } from '../ui/input'
 
 // TODO: fetch properties from db, get their names, randomize order, place as placeholder for nav search
 
 const NavSearch = () => {
   const searchParams = useSearchParams()
-  const pathname = usePathname()
   const { replace } = useRouter()
 
   const [search, setSearch] = useState<string>(
@@ -25,7 +24,7 @@ const NavSearch = () => {
       params.delete('search')
     }
 
-    replace(`${pathname}?${params.toString()}`)
+    replace(`/?${params.toString()}`)
   }, 500)
 
   return (
