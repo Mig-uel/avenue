@@ -1,5 +1,6 @@
 import FavoriteButton from '@/components/card/favorite-button.component'
 import Breadcrumbs from '@/components/properties/breadcrumbs.component'
+import ShareButton from '@/components/properties/share-button.component'
 import { fetchPropertyDetails } from '@/utils/actions/property/action'
 import { redirect } from 'next/navigation'
 
@@ -23,7 +24,7 @@ const PropertyDetailsPage = async ({
         <h1 className='text-4xl font-bold capitalize'>{tagline}</h1>
 
         <div className='flex items-center gap-x-4'>
-          {/* TODO: share button */}
+          <ShareButton propertyId={property.id} name={name} />
           <FavoriteButton propertyId={property.id} />
         </div>
       </header>
