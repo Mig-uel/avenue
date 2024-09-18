@@ -1,5 +1,6 @@
 import FavoriteButton from '@/components/card/favorite-button.component'
 import PropertyRating from '@/components/card/property-rating.component'
+import BookingCalendar from '@/components/properties/booking-calendar.component'
 import Breadcrumbs from '@/components/properties/breadcrumbs.component'
 import ImageContainer from '@/components/properties/image-container.component'
 import ShareButton from '@/components/properties/share-button.component'
@@ -43,7 +44,7 @@ const PropertyDetailsPage = async ({
         </div>
 
         <div className='lg:col-span-4 flex flex-col items-center'>
-          {/* TODO: calendar */}
+          <BookingCalendar />
         </div>
       </section>
     </section>
