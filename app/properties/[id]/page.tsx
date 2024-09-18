@@ -2,10 +2,12 @@ import FavoriteButton from '@/components/card/favorite-button.component'
 import PropertyRating from '@/components/card/property-rating.component'
 import BookingCalendar from '@/components/properties/booking-calendar.component'
 import Breadcrumbs from '@/components/properties/breadcrumbs.component'
+import Description from '@/components/properties/description.component'
 import ImageContainer from '@/components/properties/image-container.component'
 import PropertyDetails from '@/components/properties/property-details.component'
 import ShareButton from '@/components/properties/share-button.component'
 import UserInfo from '@/components/properties/user-info.component'
+import { Separator } from '@/components/ui/separator'
 import { fetchPropertyDetails } from '@/utils/actions/property/action'
 import { redirect } from 'next/navigation'
 
@@ -26,6 +28,7 @@ const PropertyDetailsPage = async ({
     guests,
     tagline,
     image,
+    description,
     profile: { firstName, profileImage },
   } = property
   const details = { baths, bedrooms, beds, guests }
@@ -54,6 +57,8 @@ const PropertyDetailsPage = async ({
           </div>
           <PropertyDetails {...details} />
           <UserInfo firstName={firstName} profileImageSrc={profileImage} />
+          <Separator className='mt-4' />
+          <Description description={description} />
         </div>
 
         <div className='lg:col-span-4 flex flex-col items-center'>
