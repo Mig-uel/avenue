@@ -1,8 +1,10 @@
+import Link from 'next/link'
 import { Card, CardContent, CardHeader } from '../ui/card'
 import Comment from './comment.component'
 import Rating from './rating.component'
 
 type ReviewCard = {
+  propertyId?: string
   comment: string
   rating: number
   name: string
@@ -10,7 +12,14 @@ type ReviewCard = {
   children?: React.ReactNode
 }
 
-const ReviewCard = ({ comment, rating, name, image, children }: ReviewCard) => {
+const ReviewCard = ({
+  comment,
+  rating,
+  name,
+  image,
+  children,
+  propertyId,
+}: ReviewCard) => {
   return (
     <Card className='relative'>
       <CardHeader>
@@ -21,7 +30,14 @@ const ReviewCard = ({ comment, rating, name, image, children }: ReviewCard) => {
             className='w-12 h-12 rounded-full object-cover'
           />
           <div className='ml-4'>
-            <h3 className='text-sm font-bold mb-1'>{name}</h3>
+            <h3 className='text-sm font-bold mb-1'>
+              <Link
+                href={`/properties/${propertyId}`}
+                className='hover:underline'
+              >
+                {name}
+              </Link>
+            </h3>
             <Rating rating={rating} />
           </div>
         </div>
