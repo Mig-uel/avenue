@@ -1,7 +1,6 @@
 import FavoriteButton from '@/components/card/favorite-button.component'
 import PropertyRating from '@/components/card/property-rating.component'
 import Amenities from '@/components/properties/amenities.component'
-import BookingCalendar from '@/components/properties/booking-calendar.component'
 import Breadcrumbs from '@/components/properties/breadcrumbs.component'
 import Description from '@/components/properties/description.component'
 import ImageContainer from '@/components/properties/image-container.component'
@@ -80,12 +79,6 @@ const PropertyDetailsPage = async ({
           <Amenities amenities={property.amenities} />
           <DynamicMap countryCode={property.country} />
         </div>
-
-        {user && (
-          <div className='lg:col-span-4 flex flex-col items-center'>
-            <BookingCalendar />
-          </div>
-        )}
       </section>
       {reviewDoesNotExist && <SubmitReview propertyId={property.id} />}
       <PropertyReviews propertyId={property.id} />
