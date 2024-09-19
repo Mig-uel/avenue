@@ -106,7 +106,7 @@ export const ActionButton = ({
       variant='link'
       className='p-2 cursor-pointer'
     >
-      {pending ? <ReloadIcon className='animate-spin' /> : buttonAction}
+      {pending ? <ReloadIcon className='animate-spin' /> : buttonIcon}
     </Button>
   )
 }
