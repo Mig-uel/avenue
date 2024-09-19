@@ -21,7 +21,7 @@ const PropertyReviews = async ({ propertyId }: { propertyId: string }) => {
 
           const reviewInfo = { comment, rating, name, image }
 
-          return <ReviewCard {...reviewInfo} />
+          return <ReviewCard key={index} {...reviewInfo} />
         })}
       </div>
     </div>
