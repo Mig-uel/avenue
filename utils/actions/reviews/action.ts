@@ -145,7 +145,7 @@ export const fetchPropertyRating = async (propertyId: string) => {
   })
 
   return {
-    rating: result[0]._avg.rating?.toFixed() ?? 0,
-    count: result[0]._count.rating ?? 0,
+    rating: result[0]?._avg?.rating?.toFixed() ?? 0,
+    count: result[0]?._count?.rating ?? 0,
   }
 }
