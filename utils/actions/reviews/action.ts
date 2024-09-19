@@ -68,6 +68,34 @@ export const fetchPropertyReviews = async (propertyId: string) => {
   return reviews
 }
 
-export const fetchPropertyReviewsByUser = async () => {}
+/**
+ * FETCH REVIEWS BY USER
+ */
+export const fetchPropertyReviewsByUser = async () => {
+  const user = await getAuthUser()
 
-export const deleteReviewAction = async () => {}
+  const reviews = await db.review.findMany({
+    where: {
+      profileId: user.id,
+    },
+    select: {
+      id: true,
+      rating: true,
+      comment: true,
+
+      property: {
+        select: {
+          id: true,
+          name: true,
+          image: true,
+        },
+      },
+    },
+    orderBy: {
+      createdAt: 'desc',
+    },
+  })
+
+  return reviews
+}
+
