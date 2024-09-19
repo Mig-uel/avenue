@@ -64,7 +64,7 @@ const PropertyDetailsPage = async ({
       <ImageContainer src={image} alt={name} />
 
       <section className='lg:grid lg:grid-cols-12 gap-x-12 mt-12'>
-        <div className={`lg:col-span-${user ? '8' : '12'}`}>
+        <div className={`${user ? 'lg:col-span-8' : 'lg:col-span-12'}`}>
           <div className='flex gap-x-4 items-center'>
             <h1 className='text-xl font-bold'>{property.name}</h1>
             <PropertyRating inPage propertyId={property.id} />
