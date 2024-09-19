@@ -6,6 +6,7 @@ type TextAreaInput = {
   label?: string
   defaultValue?: string
   placeholder?: string
+  rows?: number
 }
 
 const TextAreaInput = ({
@@ -13,6 +14,7 @@ const TextAreaInput = ({
   defaultValue = '',
   label,
   placeholder = '',
+  rows = 5,
 }: TextAreaInput) => {
   return (
     <div className='mb-2'>
@@ -24,7 +26,7 @@ const TextAreaInput = ({
         name={name}
         defaultValue={defaultValue}
         placeholder={placeholder}
-        rows={5}
+        rows={rows}
         required
         className='leading-loose'
       />
