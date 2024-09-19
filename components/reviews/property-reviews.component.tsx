@@ -5,7 +5,7 @@ import ReviewCard from './review-card.components'
 const PropertyReviews = async ({ propertyId }: { propertyId: string }) => {
   const reviews = await fetchPropertyReviews(propertyId)
 
-  if (!reviews) return null
+  if (!reviews.length) return null
 
   return (
     <div className='mt-8'>
