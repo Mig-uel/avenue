@@ -96,3 +96,15 @@ export const propertySchema = z.object({
   }),
   amenities: z.string(),
 })
+
+/** REVIEWS INPUT VALIDATION SCHEMA */
+export const reviewSchema = z.object({
+  propertyId: z.string(),
+  rating: z.coerce.number().int().min(1).max(5),
+  comment: z
+    .string()
+    .min(10, { message: 'Review must be greater than 10 characters' })
+    .max(1000, {
+      message: 'Review must be less than 1000 characters',
+    }),
+})
