@@ -30,23 +30,23 @@ const ReviewsPage = async () => {
     <>
       <Title text='Your Reviews' />
 
-      <section className='grid md:grid-cols-2 gap-8 mt-4'>
-        {reviews.map((review, index) => {
-          const reviewInfo = {
-            name: review.property.name,
-            comment: review.comment,
-            rating: review.rating,
-            image: review.property.image,
-            propertyId: review.property.id,
-          }
+        <section className='grid md:grid-cols-2 gap-8 mt-4'>
+          {reviews.map((review, index) => {
+            const reviewInfo = {
+              name: review.property.name,
+              comment: review.comment,
+              rating: review.rating,
+              image: review.property.image,
+              propertyId: review.property.id,
+            }
 
-          return (
-            <ReviewCard key={index} {...reviewInfo}>
-              <DeleteReview reviewId={review.id} />
-            </ReviewCard>
-          )
-        })}
-      </section>
+            return (
+              <ReviewCard key={index} {...reviewInfo}>
+                <DeleteReview reviewId={review.id} />
+              </ReviewCard>
+            )
+          })}
+        </section>
     </>
   )
 }
