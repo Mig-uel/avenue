@@ -99,3 +99,28 @@ export const fetchPropertyReviewsByUser = async () => {
   return reviews
 }
 
+/**
+ * DELETE REVIEW ACTION
+ * @param prevState
+ * @returns
+ */
+export const deleteReviewAction = async (prevState: { reviewId: string }) => {
+  try {
+    const user = await getAuthUser()
+    const { reviewId } = prevState
+
+    await db.review.delete({
+      where: {
+        id: reviewId,
+        profileId: user.id,
+      },
+    })
+
+    revalidatePath('/reviews')
+    return {
+      message: 'Review deleted',
+    }
+  } catch (error) {
+    return errorMessage(error)
+  }
+}
