@@ -5,6 +5,12 @@ import { errorMessage, getAuthUser } from '@/utils/functions.utils'
 import { reviewSchema, validateWithZodSchema } from '@/utils/schemas'
 import { revalidatePath } from 'next/cache'
 
+/**
+ * CREATE REVIEW ACTION
+ * @param prevState
+ * @param formData
+ * @returns
+ */
 export const createReviewAction = async (
   prevState: any,
   formData: FormData
@@ -33,7 +39,34 @@ export const createReviewAction = async (
   }
 }
 
-export const fetchPropertyReviews = async () => {}
+/**
+ * FETCH PROPERTY REVIEWS
+ * @param propertyId
+ * @returns
+ */
+export const fetchPropertyReviews = async (propertyId: string) => {
+  const reviews = await db.review.findMany({
+    where: {
+      propertyId,
+    },
+    select: {
+      id: true,
+      rating: true,
+      comment: true,
+      profile: {
+        select: {
+          firstName: true,
+          profileImage: true,
+        },
+      },
+    },
+    orderBy: {
+      createdAt: 'desc',
+    },
+  })
+
+  return reviews
+}
 
 export const fetchPropertyReviewsByUser = async () => {}
 
