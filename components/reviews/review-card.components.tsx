@@ -10,6 +10,7 @@ type ReviewCard = {
   name: string
   image: string
   children?: React.ReactNode
+  isUser?: boolean
 }
 
 const ReviewCard = ({
@@ -19,6 +20,7 @@ const ReviewCard = ({
   image,
   children,
   propertyId,
+  isUser,
 }: ReviewCard) => {
   return (
     <Card className='relative'>
@@ -31,12 +33,16 @@ const ReviewCard = ({
           />
           <div className='ml-4'>
             <h3 className='text-sm font-bold mb-1'>
-              <Link
-                href={`/properties/${propertyId}`}
-                className='hover:underline'
-              >
-                {name}
-              </Link>
+              {isUser ? (
+                name
+              ) : (
+                <Link
+                  href={`/properties/${propertyId}`}
+                  className='hover:underline'
+                >
+                  {name}
+                </Link>
+              )}
             </h3>
             <Rating rating={rating} />
           </div>
