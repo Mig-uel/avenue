@@ -8,6 +8,7 @@ import ImageContainer from '@/components/properties/image-container.component'
 import PropertyDetails from '@/components/properties/property-details.component'
 import ShareButton from '@/components/properties/share-button.component'
 import UserInfo from '@/components/properties/user-info.component'
+import SubmitReview from '@/components/reviews/submit-review.component'
 import { Separator } from '@/components/ui/separator'
 import { Skeleton } from '@/components/ui/skeleton'
 import { fetchPropertyDetails } from '@/utils/actions/property/action'
@@ -77,6 +78,8 @@ const PropertyDetailsPage = async ({
           <BookingCalendar />
         </div>
       </section>
+
+      <SubmitReview propertyId={property.id} />
     </section>
   )
 }
