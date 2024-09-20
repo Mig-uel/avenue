@@ -4,6 +4,7 @@ import { calculateTotals } from '@/utils/calculateTotal'
 import db from '../../db'
 import { errorMessage, getAuthUser } from '@/utils/functions.utils'
 import { redirect } from 'next/navigation'
+import { revalidatePath } from 'next/cache'
 
 export const createBookingAction = async (prevState: {
   propertyId: string
@@ -77,3 +78,30 @@ export const fetchBookings = async () => {
   return bookings
 }
 
+/**
+ * DELETE BOOKING
+ * @param prevState
+ * @returns
+ */
+export const deleteBookingAction = async (prevState: { bookingId: string }) => {
+  try {
+    const { bookingId } = prevState
+
+    const user = await getAuthUser()
+
+    const result = await db.booking.delete({
+      where: {
+        id: bookingId,
+        profileId: user.id,
+      },
+    })
+
+    revalidatePath('/bookings')
+
+    return {
+      message: 'Booking has been deleted',
+    }
+  } catch (error) {
+    return errorMessage(error)
+  }
+}
