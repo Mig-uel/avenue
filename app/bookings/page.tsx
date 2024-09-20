@@ -1,4 +1,6 @@
 import CountryName from '@/components/card/country-name.component'
+import { ActionButton } from '@/components/form/buttons.component'
+import FormContainer from '@/components/form/form-container.component'
 import EmptyList from '@/components/home/empty-list.component'
 import Title from '@/components/properties/title.component'
 import {
@@ -10,10 +12,23 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { fetchBookings } from '@/utils/actions/bookings/actions'
+import {
+  deleteBookingAction,
+  fetchBookings,
+} from '@/utils/actions/bookings/actions'
 import { formatCurrency, formatDate } from '@/utils/format'
 
 import Link from 'next/link'
+
+const DeleteBooking = ({ bookingId }: { bookingId: string }) => {
+  const deleteBooking = deleteBookingAction.bind(null, { bookingId })
+
+  return (
+    <FormContainer action={deleteBooking}>
+      <ActionButton buttonAction='delete' />
+    </FormContainer>
+  )
+}
 
 const BookingsPage = async () => {
   const bookings = await fetchBookings()
@@ -68,7 +83,9 @@ const BookingsPage = async () => {
                 <TableCell>{formatCurrency(orderTotal)}</TableCell>
                 <TableCell>{startDate}</TableCell>
                 <TableCell>{endDate}</TableCell>
-                {/* TODO: add delete action */}
+                <TableCell>
+                  <DeleteBooking bookingId={id} />
+                </TableCell>
               </TableRow>
             )
           })}
