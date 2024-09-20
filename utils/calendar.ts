@@ -1,6 +1,11 @@
 import type { Booking } from './types'
 import type { DateRange } from 'react-day-picker'
 
+export const defaultSelected: DateRange = {
+  from: undefined,
+  to: undefined,
+}
+
 export const generateBlockedPeriods = ({
   bookings,
   today,
