@@ -11,7 +11,7 @@ type PropertyState = {
 }
 
 // init store
-export const useProperty = create<PropertyState>(() => {
+export const usePropertyState = create<PropertyState>(() => {
   return {
     propertyId: '',
     price: 0,
