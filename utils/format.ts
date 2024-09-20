@@ -14,6 +14,12 @@ export const formatCurrency = (amount: number | null) => {
   }).format(value)
 }
 
+/**
+ * Format singular or plural sentence
+ * @param qty
+ * @param noun
+ * @returns
+ */
 export const formatQuantity = (qty: number, noun: string) =>
   qty === 1 ? `${qty} ${noun}` : `${qty} ${noun}s`
 
