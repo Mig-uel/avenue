@@ -29,14 +29,15 @@ export const calculateTotals = ({
   const subTotal = totalNights * price
 
   const fees: Fees = {
-    cleaning: 21,
+    cleaning: 20,
     service: 40,
   }
 
   const taxRate = 0.1
   const tax = subTotal * taxRate
 
-  const total = Object.values(fees).reduce((acc, curr) => acc + curr, 0) + tax
+  const total =
+    Object.values(fees).reduce((acc, curr) => acc + curr, 0) + tax + subTotal
 
   return {
     totalNights,
