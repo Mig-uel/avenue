@@ -1,5 +1,3 @@
-'use client'
-
 import { calculateDaysBetween } from './calendar'
 
 type BookingDetails = {
