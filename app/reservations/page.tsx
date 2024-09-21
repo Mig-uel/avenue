@@ -39,7 +39,9 @@ const ReservationsPage = async () => {
       </h4>
 
       <Table>
-        <TableCaption>A list of your recent reservations</TableCaption>
+        <TableCaption>
+          A list of your recent rental reservations made by others
+        </TableCaption>
 
         <TableHeader>
           <TableRow>
