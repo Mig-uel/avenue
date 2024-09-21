@@ -18,6 +18,13 @@ export const fetchReservations = async () => {
       createdAt: 'desc',
     },
     select: {
+      id: true,
+      orderTotal: true,
+      totalNights: true,
+      checkIn: true,
+      checkOut: true,
+      
+
       property: {
         select: {
           id: true,
