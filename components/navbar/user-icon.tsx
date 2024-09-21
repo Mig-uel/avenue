@@ -13,7 +13,7 @@ const UserIcon = async () => {
           src={profileImage}
           width={24}
           height={24}
-          className='rounded-full object-cover'
+          className='rounded-full object-cover h-[24px] w-[24px]'
         />
       ) : (
         <CircleUserRound className='w-6 h-6 bg-primary rounded-full text-white' />
