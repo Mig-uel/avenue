@@ -41,11 +41,6 @@ const LinksDropdown = () => {
               Home
             </Link>
           </DropdownMenuItem>
-          <DropdownMenuItem>
-            <Link href='/rentals' className='capitalize w-full'>
-              Rentals
-            </Link>
-          </DropdownMenuItem>
 
           <DropdownMenuSeparator />
 
