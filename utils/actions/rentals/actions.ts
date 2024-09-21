@@ -3,7 +3,12 @@
 import { revalidatePath } from 'next/cache'
 import db from '../../db'
 import { errorMessage, getAuthUser } from '@/utils/functions.utils'
-import { propertySchema, validateWithZodSchema } from '@/utils/schemas'
+import {
+  imageSchema,
+  propertySchema,
+  validateWithZodSchema,
+} from '@/utils/schemas'
+import { uploadImage } from '@/utils/supabase'
 /**
  * DELETE RENTALS BY PROPERTY ID AND USER ID
  * @param prevState
@@ -134,6 +139,41 @@ export const updatePropertyAction = async (
 
     return {
       message: 'Rental has been updated',
+    }
+  } catch (error) {
+    return errorMessage(error)
+  }
+}
+
+export const updatePropertyImageAction = async (
+  prevState: any,
+  formData: FormData
+): Promise<{ message: string }> => {
+  try {
+    const user = await getAuthUser()
+
+    const propertyId = formData.get('propertyId') as string
+
+    const image = formData.get('image') as File
+
+    const validatedFields = validateWithZodSchema(imageSchema, { image })
+
+    const fullPath = await uploadImage(validatedFields.image)
+
+    await db.property.update({
+      where: {
+        id: propertyId,
+        profileId: user.id,
+      },
+      data: {
+        image: fullPath,
+      },
+    })
+
+    revalidatePath(`/rentals/${propertyId}/edit`)
+
+    return {
+      message: 'Rental image has been updated',
     }
   } catch (error) {
     return errorMessage(error)
