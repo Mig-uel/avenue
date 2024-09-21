@@ -10,7 +10,9 @@ export const fetchReservations = async () => {
 
   return await db.booking.findMany({
     where: {
-      profileId: user.id,
+      property: {
+        profileId: user.id,
+      },
     },
     orderBy: {
       createdAt: 'desc',
