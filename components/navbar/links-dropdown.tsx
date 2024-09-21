@@ -11,8 +11,12 @@ import { SignOutLink, UserIcon } from './'
 import { nav_links } from '@/utils/nav-links'
 import Link from 'next/link'
 import { SignedIn, SignedOut, SignInButton } from '@clerk/nextjs'
+import { currentUser } from '@clerk/nextjs/server'
 
-const LinksDropdown = () => {
+const LinksDropdown = async () => {
+  const user = await currentUser()
+  const isAdmin = user?.privateMetadata?.isAdmin
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -23,13 +27,19 @@ const LinksDropdown = () => {
       </DropdownMenuTrigger>
       <DropdownMenuContent className='w-52 ' align='start' sideOffset={10}>
         <SignedIn>
-          {nav_links.map((link, index) => (
-            <DropdownMenuItem key={index}>
-              <Link href={link.href} className='capitalize w-full'>
-                {link.label}
-              </Link>
-            </DropdownMenuItem>
-          ))}
+          {nav_links.map((link, index) => {
+            if (link.label === 'admin' && !isAdmin) {
+              return
+            }
+
+            return (
+              <DropdownMenuItem key={index}>
+                <Link href={link.href} className='capitalize w-full'>
+                  {link.label}
+                </Link>
+              </DropdownMenuItem>
+            )
+          })}
           <DropdownMenuSeparator />
           <DropdownMenuItem>
             <SignOutLink />
