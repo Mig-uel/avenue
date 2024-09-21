@@ -9,7 +9,17 @@ type AmenitiesInput = {
 }
 
 const AmenitiesInput = ({ defaultValue }: AmenitiesInput) => {
-  const [selected, setSelected] = useState<Amenity[]>(defaultValue || amenities)
+  const amenitiesWithIcons = defaultValue?.map(({ name, selected }) => {
+    return {
+      name,
+      selected,
+      icon: amenities.find((amenity) => amenity.name === name)!.icon,
+    }
+  })
+
+  const [selected, setSelected] = useState<Amenity[]>(
+    amenitiesWithIcons || amenities
+  )
 
   const handleChange = (amenity: Amenity) => {
     setSelected((prev) => {
