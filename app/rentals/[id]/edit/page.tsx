@@ -23,8 +23,9 @@ const EditRentalPage = async ({ params }: { params: { id: string } }) => {
   const property = await fetchPropertyDetails(id)
   if (!property) return redirect('/')
 
-  const updateImage = updatePropertyImageAction.bind(null, { propertyId: id })
-  const updateProperty = updatePropertyAction.bind(null, { propertyId: id })
+  const updateImage = updatePropertyImageAction.bind(null, {
+    propertyId: id,
+  })
 
   const defaultAmenities: Amenity[] = JSON.parse(property.amenities)
 
@@ -40,7 +41,8 @@ const EditRentalPage = async ({ params }: { params: { id: string } }) => {
           image={property.image}
         />
 
-        <FormContainer action={updateProperty}>
+        <FormContainer action={updatePropertyAction}>
+          <input type='hidden' name='propertyId' value={property.id} />
           <div className='grid md:grid-cols-2 gap-8 mb-4 mt-8'>
             <FormInput
               name='name'
