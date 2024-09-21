@@ -23,10 +23,6 @@ const EditRentalPage = async ({ params }: { params: { id: string } }) => {
   const property = await fetchPropertyDetails(id)
   if (!property) return redirect('/')
 
-  const updateImage = updatePropertyImageAction.bind(null, {
-    propertyId: id,
-  })
-
   const defaultAmenities: Amenity[] = JSON.parse(property.amenities)
 
   return (
@@ -37,9 +33,11 @@ const EditRentalPage = async ({ params }: { params: { id: string } }) => {
         <ImageInputContainer
           name={property.name}
           text='Update Image'
-          action={updateImage}
+          action={updatePropertyImageAction}
           image={property.image}
-        />
+        >
+          <input type='hidden' name='propertyId' value={property.id} />
+        </ImageInputContainer>
 
         <FormContainer action={updatePropertyAction}>
           <input type='hidden' name='propertyId' value={property.id} />
