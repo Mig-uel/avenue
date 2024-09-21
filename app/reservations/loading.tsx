@@ -1,3 +1,5 @@
+'use client'
+
 import LoadingTable from '@/components/booking/loading-table'
 
 const Loading = () => {
