@@ -9,13 +9,12 @@ generator client {
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
 }
 
 model Profile {
-  id           String     @id @default(uuid())
+  id           String     @id @default(uuid()) @map("_id") @db.ObjectId
   clerkId      String     @unique
   firstName    String
   lastName     String
@@ -31,7 +30,7 @@ model Profile {
 }
 
 model Property {
-  id          String     @id @default(uuid())
+  id          String     @id @default(uuid()) @map("_id") @db.ObjectId
   name        String
   tagline     String
   category    String
@@ -54,7 +53,7 @@ model Property {
 }
 
 model Favorite {
-  id        String   @id @default(uuid())
+  id        String   @id @default(uuid()) @map("_id") @db.ObjectId
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -62,17 +61,17 @@ model Favorite {
   profileId String
 
   property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
-  propertyId String
+  propertyId String   @db.ObjectId
 }
 
 model Review {
-  id String @id @default(uuid())
+  id String @id @default(uuid()) @map("_id") @db.ObjectId
 
   profile   Profile @relation(fields: [profileId], references: [clerkId], onDelete: Cascade)
   profileId String
 
   property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
-  propertyId String
+  propertyId String   @db.ObjectId
 
   rating    Int
   comment   String
@@ -81,12 +80,12 @@ model Review {
 }
 
 model Booking {
-  id String @id @default(uuid())
+  id String @id @default(uuid()) @map("_id") @db.ObjectId
 
   profileId String
   profile   Profile @relation(fields: [profileId], references: [clerkId], onDelete: Cascade)
 
-  propertyId String
+  propertyId String   @db.ObjectId
   property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
 
   orderTotal    Int
