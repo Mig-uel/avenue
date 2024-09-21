@@ -119,20 +119,21 @@ export const updateProfileImageAction: actionFunction = async (
 
     const validatedFields = validateWithZodSchema(imageSchema, { image })
 
-    const newImagePath = await uploadImage(validatedFields.image)
+    const newImagePath = await uploadImage(validatedFields.image, 'avatars')
 
     /* --------------------- */
+    // TODO: remove old user avatar
     // get user from supabase
-    const userFromDb = await db.profile.findUnique({
-      where: {
-        clerkId: user.id,
-      },
-    })
+    // const userFromDb = await db.profile.findUnique({
+    //   where: {
+    //     clerkId: user.id,
+    //   },
+    // })
 
-    if (!userFromDb) throw new Error('User not found')
+    // if (!userFromDb) throw new Error('User not found')
 
-    const oldImage = userFromDb.profileImage
-    await removeOldImage(oldImage)
+    // const oldImage = userFromDb.profileImage
+    // await removeOldImage(oldImage)
     /* --------------------- */
 
     await db.profile.update({
