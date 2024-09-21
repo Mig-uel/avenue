@@ -33,6 +33,10 @@ export const nav_links: NavLink[] = [
     label: 'reservations',
   },
   {
+    href: '/admin',
+    label: 'admin',
+  },
+  {
     href: '/profile',
     label: 'profile',
   },
