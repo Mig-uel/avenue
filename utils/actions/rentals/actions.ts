@@ -60,7 +60,7 @@ export const fetchRentals = async () => {
         },
       })
 
-      const orderTotal = await db.booking.aggregate({
+      const orderTotalSum = await db.booking.aggregate({
         where: {
           propertyId: rental.id,
         },
@@ -72,7 +72,7 @@ export const fetchRentals = async () => {
       return {
         ...rental,
         totalNightsSum: totalNightsSum._sum.totalNights,
-        orderTotal: orderTotal._sum.orderTotal,
+        orderTotalSum: orderTotalSum._sum.orderTotal,
       }
     })
   )
