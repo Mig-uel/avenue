@@ -3,6 +3,7 @@
 import { revalidatePath } from 'next/cache'
 import db from '../../db'
 import { errorMessage, getAuthUser } from '@/utils/functions.utils'
+import { propertySchema, validateWithZodSchema } from '@/utils/schemas'
 /**
  * DELETE RENTALS BY PROPERTY ID AND USER ID
  * @param prevState
@@ -97,3 +98,44 @@ export const fetchRentalDetails = async (propertyId: string) => {
   })
 }
 
+/**
+ * UPDATE PROPERTY ACTION
+ * @param prevState
+ * @param formData
+ * @returns
+ */
+export const updatePropertyAction = async (
+  prevState: any,
+  formData: FormData
+): Promise<{ message: string }> => {
+  try {
+    const user = await getAuthUser()
+
+    const propertyId = formData.get('propertyId') as string
+
+    const formDataObject = Object.fromEntries(formData)
+
+    const validatedFields = validateWithZodSchema(
+      propertySchema,
+      formDataObject
+    )
+
+    await db.property.update({
+      where: {
+        id: propertyId,
+        profileId: user.id,
+      },
+      data: {
+        ...validatedFields,
+      },
+    })
+
+    revalidatePath(`/rentals/${propertyId}/edit`)
+
+    return {
+      message: 'Rental has been updated',
+    }
+  } catch (error) {
+    return errorMessage(error)
+  }
+}
