@@ -35,12 +35,15 @@ const BookingsPage = async () => {
 
   if (!bookings.length)
     return (
-      <EmptyList heading='Just tumbleweeds here. Let’s track down what you’re after!' />
+      <>
+        <Title text='Your Bookings' />
+        <EmptyList heading='Just tumbleweeds here. Let’s track down what you’re after!' />
+      </>
     )
 
   return (
     <div className=''>
-      <Title text='Bookings' />
+      <Title text='Your Bookings' />
       <h4 className='mb-4 capitalize'>Total Bookings: {bookings.length}</h4>
 
       <Table>
