@@ -29,6 +29,10 @@ export const nav_links: NavLink[] = [
     label: 'rentals',
   },
   {
+    href: '/reservations',
+    label: 'reservations',
+  },
+  {
     href: '/profile',
     label: 'profile',
   },
