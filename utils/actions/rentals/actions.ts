@@ -81,3 +81,19 @@ export const fetchRentals = async () => {
 
   return rentalsWithBookings
 }
+
+/**
+ * FETCH PROPERTY/RENTAL DETAILS
+ * @param propertyId
+ * @returns
+ */
+export const fetchRentalDetails = async (propertyId: string) => {
+  const user = await getAuthUser()
+  return db.property.findUnique({
+    where: {
+      id: propertyId,
+      profileId: user.id,
+    },
+  })
+}
+
