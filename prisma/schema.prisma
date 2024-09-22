@@ -14,7 +14,7 @@ datasource db {
 }
 
 model Profile {
-  id           String     @id @default(uuid()) @map("_id") @db.ObjectId
+  id           String     @id @default(auto()) @map("_id") @db.ObjectId
   clerkId      String     @unique
   firstName    String
   lastName     String
@@ -30,7 +30,7 @@ model Profile {
 }
 
 model Property {
-  id          String     @id @default(uuid()) @map("_id") @db.ObjectId
+  id          String     @id @default(auto()) @map("_id") @db.ObjectId
   name        String
   tagline     String
   category    String
@@ -53,7 +53,7 @@ model Property {
 }
 
 model Favorite {
-  id        String   @id @default(uuid()) @map("_id") @db.ObjectId
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -65,7 +65,7 @@ model Favorite {
 }
 
 model Review {
-  id String @id @default(uuid()) @map("_id") @db.ObjectId
+  id String @id @default(auto()) @map("_id") @db.ObjectId
 
   profile   Profile @relation(fields: [profileId], references: [clerkId], onDelete: Cascade)
   profileId String
@@ -80,7 +80,7 @@ model Review {
 }
 
 model Booking {
-  id String @id @default(uuid()) @map("_id") @db.ObjectId
+  id String @id @default(auto()) @map("_id") @db.ObjectId
 
   profileId String
   profile   Profile @relation(fields: [profileId], references: [clerkId], onDelete: Cascade)
