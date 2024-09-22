@@ -68,6 +68,8 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
         },
       ],
       mode: 'payment',
+
+      // sessionId will be injected my stripe and then user is forwarded to our api route
       return_url: `${origin}/api/confirm?session_id={CHECKOUT_SESSION_ID}`,
     })
 
