@@ -17,6 +17,14 @@ export const createBookingAction = async (prevState: {
   try {
     const user = await getAuthUser()
 
+    // delete bookings where user has not paid
+    await db.booking.deleteMany({
+      where: {
+        profileId: user.id,
+        paymentStatus: false,
+      },
+    })
+
     const { propertyId, checkIn, checkOut } = prevState
 
     const property = await db.property.findUnique({
