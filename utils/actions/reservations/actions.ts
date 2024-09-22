@@ -10,6 +10,7 @@ export const fetchReservations = async () => {
 
   return await db.booking.findMany({
     where: {
+      paymentStatus: true,
       property: {
         profileId: user.id,
       },
@@ -23,7 +24,6 @@ export const fetchReservations = async () => {
       totalNights: true,
       checkIn: true,
       checkOut: true,
-      
 
       property: {
         select: {
