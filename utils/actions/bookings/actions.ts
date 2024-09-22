@@ -11,6 +11,9 @@ export const createBookingAction = async (prevState: {
   checkIn: Date
   checkOut: Date
 }) => {
+  // booking id
+  let bookingId: null | string = null
+
   try {
     const user = await getAuthUser()
 
@@ -43,11 +46,13 @@ export const createBookingAction = async (prevState: {
         propertyId: propertyId,
       },
     })
+
+    bookingId = booking.id
   } catch (error) {
     return errorMessage(error)
   }
 
-  redirect('/bookings')
+  redirect(`/checkout?bookingId=${bookingId}`)
 }
 
 /**
