@@ -1,6 +1,7 @@
 import CountryName from '@/components/card/country-name.component'
 import EmptyList from '@/components/home/empty-list.component'
 import Title from '@/components/properties/title.component'
+import ReservationStats from '@/components/reservations/reservation-stats.component'
 import {
   Table,
   TableBody,
@@ -11,7 +12,6 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { fetchReservations } from '@/utils/actions/reservations/actions'
-import { findCountryByCode } from '@/utils/countries'
 import { formatCurrency, formatDate } from '@/utils/format'
 import Link from 'next/link'
 
@@ -31,8 +31,10 @@ const ReservationsPage = async () => {
     )
 
   return (
-    <div>
+    <>
       <Title text='Your Rental Reservations' />
+
+      <ReservationStats />
 
       <h4 className='mb-4 capitalize'>
         Total Reservations: {reservations.length}
@@ -90,7 +92,7 @@ const ReservationsPage = async () => {
           })}
         </TableBody>
       </Table>
-    </div>
+    </>
   )
 }
 export default ReservationsPage
